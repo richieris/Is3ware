@@ -5,13 +5,12 @@ import { StyleSheet, Text, View, Image,
   TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Login from './Login.js'
-import Welcome from './Welcome.js'
+import Login from './Login'
+import Welcome from './Welcome'
 import React, { Component,useState } from 'react';
 
 // export{Welcome, Login};
-
-
+// Starting our app.
 const Stack = createNativeStackNavigator();
 function NavStack() {
   return (
@@ -21,9 +20,9 @@ function NavStack() {
         screenOptions={{
           headerTitleAlign: 'center',
           headerStyle: {
-            backgroundColor: '#621FF7',
+            backgroundColor: '#F7F8FB',
           },
-          headerTintColor: '#fff',
+          headerTintColor: '#000',
           headerTitleStyle :{
             fontWeight: 'bold',
           },

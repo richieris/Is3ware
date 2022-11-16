@@ -7,9 +7,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { Component,useState } from 'react';
 
-function Login ({ navigation }) {
+function Signup ({ navigation }) {
 
     const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [password, setPassword] = useState("");
     const title = 'Login';
     return (
