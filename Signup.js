@@ -11,8 +11,15 @@ function Signup ({ navigation }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [password, setPassword] = useState("");
-    const title = 'Login';
+    const [address1, setAddress1] = useState("");
+    const [address2, setAddress2] = useState("");
+    const [State, setState] = useState("");
+    const [zip, setZip] = useState("");
+    
+
+
+
+    const title = 'Signup';
     return (
         <View style={styles.container}>
         {/* <Image style={styles.image} source={require("./assets/icon.png")} /> */}
