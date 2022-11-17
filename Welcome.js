@@ -27,7 +27,7 @@ function   Welcome({ navigation })   {
               <Text style={styles.text}>{title}</Text>
             </Pressable>
 
-          <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
+          <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Signup')}>
               <Text style={styles.text}>{'Sign Up'}</Text>
             </Pressable>
 

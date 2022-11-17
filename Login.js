@@ -36,6 +36,7 @@ function Login ({ navigation }) {
             onChangeText={(password) => setPassword(password)}
           />
         </View>
+        
    
         <TouchableOpacity>
           <Text style={styles.forgot_button}>Forgot Password?</Text>

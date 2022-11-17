@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from './Login'
 import Welcome from './Welcome'
+import Signup from './Signup'
 import React, { Component,useState } from 'react';
 
 // export{Welcome, Login};
@@ -37,6 +38,11 @@ function NavStack() {
         name='Login' 
         component={Login} 
         options={{ title: 'Login' }}
+      />
+      <Stack.Screen 
+        name='Signup' 
+        component={Signup} 
+        options={{ title: 'Signup' }}
       />
           </Stack.Navigator>
          

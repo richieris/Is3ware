@@ -1,11 +1,14 @@
-import { StyleSheet, Text, View, Image,
-    TextInput,
-    Button,Pressable,
-    TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Image,
+  TextInput,
+  Button,
+  Pressable,
+  TouchableOpacity,
+  Text,
+  FlatList,
+  } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { Component,useState } from 'react';
+import axios from 'axios';
 
 function Signup ({ navigation }) {
 
@@ -15,17 +18,37 @@ function Signup ({ navigation }) {
     const [address2, setAddress2] = useState("");
     const [State, setState] = useState("");
     const [zip, setZip] = useState("");
-    
 
 
+    const [searchKeyword,setSearchKeyword] = useState('');
+    const [searchResults,setSearchResults]= useState([]);
+    const [isShowingResults,setIsShowingResults]= useState(false);
 
     const title = 'Signup';
+
+
+async function searchLocation (text)  {
+    setSearchKeyword(text);
+    axios
+      .request({
+        method: 'post',
+        url: `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${'AIzaSyAU0c0lM0otTV0CBZZU6EnH6bmeOFY0yDo'}&input=${searchKeyword}`,
+      })
+      .then((response) => {
+        console.log(response.data);
+        this.setSearchResults(response.data.predictions);
+        this.setIsShowingResults(fasle);
+      })
+      .catch((e) => {
+        console.log(e.response);
+      });
+  };
     return (
         <View style={styles.container}>
         {/* <Image style={styles.image} source={require("./assets/icon.png")} /> */}
    
         <StatusBar style="auto" />
-        <View style={styles.inputView}>
+        <View style={styles.searchBox}>
           <TextInput
             style={styles.TextInput}
             placeholder="Email."
@@ -35,19 +58,48 @@ function Signup ({ navigation }) {
           />
         </View>
    
-        <View style={styles.inputView}>
+        <View style={styles.searchBox}>
           <TextInput
             style={styles.TextInput}
             placeholder="Password."
             placeholderTextColor="#000"
-            secureTextEntry={true}
+            // secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
           />
         </View>
-   
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
+
+        <View style={styles.searchBox}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Address1."
+            placeholderTextColor="#000"
+            onChangeText={(text) => searchLocation(text)}
+            value = {searchKeyword}
+          />
+           {isShowingResults && (
+            <FlatList
+              data={this.searchResults}
+              renderItem={({item, index}) => {
+                return (
+                  <TouchableOpacity
+                    style={styles.resultItem}
+                    onPress={() =>{setSearchKeyword(item.description);
+                      setIsShowingResults(false);}
+                      
+                      
+                    }>
+                    <Text>{item.description}</Text>
+                  </TouchableOpacity>
+                );
+              }}
+              keyExtractor={(item) => item.id}
+              style={styles.searchResultsContainer}
+            />
+          )}
+                    
+        </View>
+
+        
 
         <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
               <Text style={styles.loginText}>{title}</Text>
@@ -74,7 +126,13 @@ function Signup ({ navigation }) {
     image: {
       marginBottom: 40,
     },
-   
+    searchResultsContainer: {
+    width: 340,
+    height: 200,
+    backgroundColor: '#fff',
+    position: 'absolute',
+    top: 50,
+  },
     inputView: {
       
       // backgroundColor: "#fff",
@@ -93,7 +151,17 @@ function Signup ({ navigation }) {
       color:'white',
       alignItems: "center",
    },
-
+    searchBox: {
+        width: 340,
+        height: 50,
+        fontSize: 18,
+        borderRadius: 8,
+        borderColor: '#aaa',
+        color: '#000',
+        backgroundColor: '#fff',
+        borderWidth: 1.5,
+        paddingLeft: 15,
+      },
     TextInput: {
       height: 50,
       flex: 1,   
@@ -105,7 +173,7 @@ function Signup ({ navigation }) {
       height: 30,
       marginBottom: 30,
     },
-   
+      
     loginBtn: {
       width: "80%",
       borderRadius: 10,
@@ -116,4 +184,4 @@ function Signup ({ navigation }) {
       backgroundColor: "#232629",
     },
   });
-  export default Login;
+  export default Signup;
