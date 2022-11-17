@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image,
   TextInput,
-  Button,Alert,
+  Button,Alert,Pressable ,
   TouchableOpacity } from 'react-native';
 import { NavigationContainer,useNavigation } from '@react-navigation/native';
 
@@ -9,29 +9,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import BackgroundAnimation from './Animation/BackAnimation.js';
 import React, { Component,useState } from 'react';
 
+
+
+
 function   Welcome({ navigation })   {
-// const navigation = useNavigation(); 
-  // const { navigation } = this.props
+   const title = 'Login';
     return (
         
         <View style={styles.container}>
           {/* <BackgroundAnimation /> */}
-        {/* <Image style={styles.image} source={require("./assets/icon.png")} /> */}
+        <Image style={styles.image} source={require("./assets/logo.png")} />
         <StatusBar style="auto" />
         
+         
            
+            <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
+              <Text style={styles.text}>{title}</Text>
+            </Pressable>
 
-           <View style={styles.loginBtn}>
-        
-            <Button title="Show alert" onPress={() => navigation.navigate('Login')}   />
-            
+          <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Signup')}>
+              <Text style={styles.text}>{'Sign Up'}</Text>
+            </Pressable>
 
-        
-        </View>
-       
-       
-   
-   
         <TouchableOpacity>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
@@ -50,47 +49,36 @@ function   Welcome({ navigation })   {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      backgroundColor: "#EFF4F7",
       alignItems: "center",
       justifyContent: "center",
     },
    
     image: {
-      marginBottom: 40,
+      marginBottom: 0,
     },
    
-    inputView: {
-      width: "80%",
-      borderRadius: 25,
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      marginBottom: 20,
-      backgroundColor: "#FF1493",
-   
-      alignItems: "center",
-    },
-   
-    TextInput: {
-      height: 50,
-      flex: 1,
-      padding: 10,
-      marginLeft: 20,
-    },
    
     forgot_button: {
       height: 30,
       marginBottom: 30,
     },
-   
+   text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+  },
     loginBtn: {
-      width: "80%",
-      borderRadius: 25,
+      width: "70%",
+      borderRadius: 10,
       height: 50,
       alignItems: "center",
       justifyContent: "center",
-      marginTop: 40,
-      backgroundColor: "#FF1493",
+      marginTop: 20,
+      backgroundColor: "#000",
+      marginBottom: 20,
     },
   
   });

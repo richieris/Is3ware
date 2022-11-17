@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image,
     TextInput,
-    Button,
+    Button,Pressable,
     TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
@@ -11,6 +11,7 @@ function Login ({ navigation }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const title = 'Login';
     return (
         <View style={styles.container}>
         {/* <Image style={styles.image} source={require("./assets/icon.png")} /> */}
@@ -20,7 +21,7 @@ function Login ({ navigation }) {
           <TextInput
             style={styles.TextInput}
             placeholder="Email."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#000"
             // editable={true}
             onChangeText={(email) => setEmail(email)}
           />
@@ -30,19 +31,27 @@ function Login ({ navigation }) {
           <TextInput
             style={styles.TextInput}
             placeholder="Password."
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#000"
             secureTextEntry={true}
             onChangeText={(password) => setPassword(password)}
           />
         </View>
+        
    
         <TouchableOpacity>
           <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
-   
-        <TouchableOpacity style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+
+        <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
+              <Text style={styles.loginText}>{title}</Text>
+            </Pressable>
+
+        {/* <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')} 
+          <TouchableOpacity style={styles.loginBtn}>
+           <Text style={styles.loginText}>LOGIN</Text>
+          </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   }     
@@ -60,15 +69,24 @@ function Login ({ navigation }) {
     },
    
     inputView: {
-      backgroundColor: "#FFC0CB",
-      borderRadius: 30,
-      width: "70%",
+      
+      // backgroundColor: "#fff",
+      borderRadius: 0,
+      width: "80%",
       height: 45,
       marginBottom: 20,
-   
+       borderWidth: 1,
+      borderColor:'black',
       alignItems: "center",
     },
-   
+   loginText:{
+      height: 50,
+      flex: 1,   
+      padding: 10,
+      color:'white',
+      alignItems: "center",
+   },
+
     TextInput: {
       height: 50,
       flex: 1,   
@@ -83,12 +101,12 @@ function Login ({ navigation }) {
    
     loginBtn: {
       width: "80%",
-      borderRadius: 25,
+      borderRadius: 10,
       height: 50,
       alignItems: "center",
       justifyContent: "center",
       marginTop: 40,
-      backgroundColor: "#FF1493",
+      backgroundColor: "#232629",
     },
   });
   export default Login;
