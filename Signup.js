@@ -3,7 +3,7 @@ import { StyleSheet, View, Image,
   Button,
   Pressable,
   TouchableOpacity,
-  Text,
+  Text,SafeAreaView,ScrollView,
   FlatList,
   } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -36,18 +36,20 @@ async function searchLocation (text)  {
       })
       .then((response) => {
         console.log(response.data);
-        this.setSearchResults(response.data.predictions);
-        this.setIsShowingResults(fasle);
+        setSearchResults(response.data.predictions);
+        setIsShowingResults(true);
       })
       .catch((e) => {
         console.log(e.response);
       });
   };
     return (
-        <View style={styles.container}>
+      //<SafeAreaView style={styles.container}></SafeAreaView>
+        <SafeAreaView style={styles.container}>
         {/* <Image style={styles.image} source={require("./assets/icon.png")} /> */}
-   
+
         <StatusBar style="auto" />
+        <ScrollView style={styles.scrollView}>
         <View style={styles.searchBox}>
           <TextInput
             style={styles.TextInput}
@@ -78,7 +80,7 @@ async function searchLocation (text)  {
           />
            {isShowingResults && (
             <FlatList
-              data={this.searchResults}
+              data={searchResults}
               renderItem={({item, index}) => {
                 return (
                   <TouchableOpacity
@@ -96,9 +98,9 @@ async function searchLocation (text)  {
               style={styles.searchResultsContainer}
             />
           )}
-                    
+          
         </View>
-
+              </ScrollView>
         
 
         <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
@@ -111,7 +113,7 @@ async function searchLocation (text)  {
            <Text style={styles.loginText}>LOGIN</Text>
           </TouchableOpacity>
         </TouchableOpacity> */}
-      </View>
+      </SafeAreaView>
     );
   }     
   
@@ -122,7 +124,10 @@ async function searchLocation (text)  {
       alignItems: "center",
       justifyContent: "center",
     },
-   
+    scrollView: {
+    backgroundColor: 'white',
+    marginHorizontal: 20,
+  },
     image: {
       marginBottom: 40,
     },
@@ -161,6 +166,8 @@ async function searchLocation (text)  {
         backgroundColor: '#fff',
         borderWidth: 1.5,
         paddingLeft: 15,
+        marginTop:20,
+        marginBottom:10,
       },
     TextInput: {
       height: 50,
