@@ -132,11 +132,13 @@ async function searchLocation (text)  {
       marginBottom: 40,
     },
     searchResultsContainer: {
-    width: 340,
-    height: 200,
-    backgroundColor: '#fff',
-    position: 'absolute',
-    top: 50,
+      width: 335,
+      height: 130,
+      backgroundColor: '#fff',
+      borderWidth: 1,
+      borderColor:'black',
+      position: 'absolute',
+      top: 50,
   },
     inputView: {
       
