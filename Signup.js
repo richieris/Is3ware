@@ -73,7 +73,7 @@ async function searchLocation (text)  {
         <View style={styles.searchBox}>
           <TextInput
             style={styles.TextInput}
-            placeholder="Address1."
+            placeholder="Street Address"
             placeholderTextColor="#000"
             onChangeText={(text) => searchLocation(text)}
             value = {searchKeyword}
@@ -106,13 +106,6 @@ async function searchLocation (text)  {
         <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
               <Text style={styles.loginText}>{title}</Text>
             </Pressable>
-
-        {/* <TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')} 
-          <TouchableOpacity style={styles.loginBtn}>
-           <Text style={styles.loginText}>LOGIN</Text>
-          </TouchableOpacity>
-        </TouchableOpacity> */}
       </SafeAreaView>
     );
   }     
@@ -132,9 +125,11 @@ async function searchLocation (text)  {
       marginBottom: 40,
     },
     searchResultsContainer: {
-    width: 340,
-    height: 200,
+    width: 335,
+    height: 130,
     backgroundColor: '#fff',
+     borderWidth: 1,
+      borderColor:'black',
     position: 'absolute',
     top: 50,
   },
