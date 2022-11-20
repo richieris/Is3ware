@@ -1,85 +1,86 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image,
+import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
   TextInput,
-  Button,Alert,Pressable ,
-  TouchableOpacity } from 'react-native';
-import { NavigationContainer,useNavigation } from '@react-navigation/native';
+  Button,
+  Alert,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // import BackgroundAnimation from './Animation/BackAnimation.js';
-import React, { Component,useState } from 'react';
+import React, { Component, useState } from "react";
 
+function Welcome({ navigation }) {
+  const title = "Login";
+  return (
+    <View style={styles.container}>
+      {/* <BackgroundAnimation /> */}
+      <Image style={styles.image} source={require("./assets/logo.png")} />
+      <StatusBar style="auto" />
 
+      <Pressable
+        style={styles.loginBtn}
+        onPress={() => navigation.navigate("Login")}
+      >
+        <Text style={styles.text}>{title}</Text>
+      </Pressable>
 
+      <Pressable
+        style={styles.loginBtn}
+        onPress={() => navigation.navigate("Signup")}
+      >
+        <Text style={styles.text}>{"Sign Up"}</Text>
+      </Pressable>
 
-function   Welcome({ navigation })   {
-   const title = 'Login';
-    return (
-        
-        <View style={styles.container}>
-          {/* <BackgroundAnimation /> */}
-        <Image style={styles.image} source={require("./assets/logo.png")} />
-        <StatusBar style="auto" />
-        
-         
-           
-            <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
-              <Text style={styles.text}>{title}</Text>
-            </Pressable>
+      <TouchableOpacity>
+        <Text style={styles.forgot_button}>Forgot Password?</Text>
+      </TouchableOpacity>
 
-          <Pressable style={styles.loginBtn} onPress={() => navigation.navigate('Signup')}>
-              <Text style={styles.text}>{'Sign Up'}</Text>
-            </Pressable>
-
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-   
-        {/* <TouchableOpacity style={styles.loginBtn}>
+      {/* <TouchableOpacity style={styles.loginBtn}>
           <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity> */}
-        
-      </View>
-    );  
-             
-   
+    </View>
+  );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: "#EFF4F7",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-   
-    image: {
-      marginBottom: 0,
-    },
-   
-   
-    forgot_button: {
-      height: 30,
-      marginBottom: 30,
-    },
-   text: {
+  image: {
+    marginBottom: 0,
+  },
+
+  forgot_button: {
+    height: 30,
+    marginBottom: 30,
+  },
+  text: {
     fontSize: 16,
     lineHeight: 21,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     letterSpacing: 0.25,
-    color: 'white',
+    color: "black",
   },
-    loginBtn: {
-      width: "70%",
-      borderRadius: 10,
-      height: 50,
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 20,
-      backgroundColor: "#000",
-      marginBottom: 20,
-    },
-  
-  });
- export default Welcome;
+  loginBtn: {
+    width: "70%",
+    borderRadius: 10,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    backgroundColor: "white",
+    marginBottom: 20,
+  },
+});
+export default Welcome;

@@ -9,25 +9,21 @@
 // app.listen(port, () => {
 //     console.log(`app listening at http://localhost:${port}`)
 //   });
-var mysql = require('mysql');
+var mysql = require("mysql");
 
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "Rishirocks292",
-  database:"dmp_kamet",
+  database: "dmp_kamet",
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 
-    con.query("SELECT * FROM addresses", function (err, addresses, fields) {
+  con.query("SELECT * FROM addresses", function (err, addresses, fields) {
     if (err) throw err;
     console.log(addresses);
-    })
-
-
-
-
+  });
 });
