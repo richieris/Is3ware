@@ -80,16 +80,19 @@ function Signup({ navigation }) {
           />
         </View>
 
+        {/* street */}
         <View style={styles.searchBox}>
           <TextInput
             style={styles.TextInput}
             placeholder="Street Address"
             placeholderTextColor="#000"
             onChangeText={(text) => searchLocation(text)}
-            value={searchKeyword}
+            value={street}
           />
           {isShowingResults && (
             <FlatList
+              // ListFooterComponentStyle={{elevation:0.1, zIndex:3}}
+
               data={searchResults}
               renderItem={({ item, index }) => {
                 return (
@@ -97,8 +100,8 @@ function Signup({ navigation }) {
                     style={styles.resultItem}
                     onPress={() => {
                       let a = item.description.split(",");
-                      this.setStreet = a[0];
-                      this.setCity = a[1];
+                      setStreet(a[0]);
+                      setCity(a[1]);
                       // setState=a[2];
                       // setCountry=a[3];
                       setSearchKeyword(a[0]);
@@ -119,46 +122,20 @@ function Signup({ navigation }) {
         <View style={styles.searchBox}>
           <TextInput
             style={styles.TextInput}
-            placeholder="State"
+            placeholder="City"
             placeholderTextColor="#000"
-            onChangeText={(text) => searchLocation(text)}
+            onChangeText={(city) => setCity(city)}
             value={city}
           />
-          {/* {isShowingResults && (
-            <FlatList
-              data={searchResults}
-              renderItem={({item, index}) => {
-                return (
-                  <TouchableOpacity
-                    style={styles.resultItem}
-                    onPress={() =>{
-                      let a = item.description.split(',');
-                      this.setAddress1= a[0];
-                      // setAddress2=a[1];
-                      // setState=a[2];
-                      // setCountry=a[3];
-                      setSearchKeyword(a[0]);
-                      setIsShowingResults(false);}
-                      
-                      
-                    }>
-                    <Text>{item.description}</Text>
-                  </TouchableOpacity>
-                );
-              }}
-              keyExtractor={(item) => item.id}
-              style={styles.searchResultsContainer}
-            />
-          )} */}
         </View>
-      </ScrollView>
 
-      <Pressable
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Text style={styles.loginText}>{title}</Text>
-      </Pressable>
+        <Pressable
+          style={styles.loginBtn}
+          onPress={() => navigation.navigate("Login")}
+        >
+          <Text style={styles.loginText}>{title}</Text>
+        </Pressable>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -196,12 +173,22 @@ const styles = StyleSheet.create({
     borderColor: "black",
     alignItems: "center",
   },
+  resultItem: {
+    width: "100%",
+    zIndex: 1,
+    elevation:1,
+    justifyContent: "center",
+    height: 40,
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    paddingLeft: 15,
+  },
   loginText: {
     height: 50,
     flex: 1,
     padding: 10,
     color: "white",
-    alignItems: "center",
+    alignItems:"center",
   },
   searchBox: {
     width: 340,
