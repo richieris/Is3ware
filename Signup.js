@@ -20,8 +20,8 @@ function Signup({ navigation }) {
   const [password, setPassword] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
-  const [State, setState] = useState("");
-  const [Country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
   const [zip, setZip] = useState("");
 
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -81,7 +81,7 @@ function Signup({ navigation }) {
         </View>
 
         {/* street */}
-        <View style={styles.searchBox}>
+        <SafeAreaView style={styles.searchBox2}>
           <TextInput
             style={styles.TextInput}
             placeholder="Street Address"
@@ -92,7 +92,6 @@ function Signup({ navigation }) {
           {isShowingResults && (
             <FlatList
               // ListFooterComponentStyle={{elevation:0.1, zIndex:3}}
-
               data={searchResults}
               renderItem={({ item, index }) => {
                 return (
@@ -102,6 +101,8 @@ function Signup({ navigation }) {
                       let a = item.description.split(",");
                       setStreet(a[0]);
                       setCity(a[1]);
+                      setState(a[2]);
+                      setCountry(a[3]);
                       // setState=a[2];
                       // setCountry=a[3];
                       setSearchKeyword(a[0]);
@@ -116,7 +117,7 @@ function Signup({ navigation }) {
               style={styles.searchResultsContainer}
             />
           )}
-        </View>
+        </SafeAreaView>
         {/* state */}
 
         <View style={styles.searchBox}>
@@ -126,6 +127,26 @@ function Signup({ navigation }) {
             placeholderTextColor="#000"
             onChangeText={(city) => setCity(city)}
             value={city}
+          />
+        </View>
+
+        <View style={styles.searchBox}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="State"
+            placeholderTextColor="#000"
+            onChangeText={(state) => setState(state)}
+            value={state}
+          />
+        </View>
+
+        <View style={styles.searchBox}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Country"
+            placeholderTextColor="#000"
+            onChangeText={(country) => setCountry(country)}
+            value={country}
           />
         </View>
 
@@ -147,6 +168,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  flatList: {
+    backgroundColor: "red",
+  },
+
   scrollView: {
     backgroundColor: "white",
     marginHorizontal: 20,
@@ -155,6 +180,8 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   searchResultsContainer: {
+    elevation: 0.1,
+    zIndex: 2,
     width: 335,
     height: 130,
     backgroundColor: "#fff",
@@ -175,8 +202,8 @@ const styles = StyleSheet.create({
   },
   resultItem: {
     width: "100%",
-    zIndex: 1,
-    elevation:1,
+    zIndex: 2,
+    elevation: 1,
     justifyContent: "center",
     height: 40,
     borderBottomColor: "#ccc",
@@ -188,12 +215,26 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     color: "white",
-    alignItems:"center",
+    alignItems: "center",
   },
   searchBox: {
     width: 340,
     height: 50,
     fontSize: 18,
+    borderRadius: 8,
+    borderColor: "#aaa",
+    color: "#000",
+    backgroundColor: "#fff",
+    borderWidth: 1.5,
+    paddingLeft: 15,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  searchBox2: {
+    width: 340,
+    height: 50,
+    fontSize: 18,
+    zIndex: 100,
     borderRadius: 8,
     borderColor: "#aaa",
     color: "#000",
