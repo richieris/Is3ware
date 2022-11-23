@@ -30,6 +30,25 @@ function Signup({ navigation }) {
 
   const title = "Signup";
 
+  InsertRecord = () => {
+    var Email = this.email;
+    var Password = this.password;
+    var checkEmail = RegExp(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i);
+     if (Email.length == 0 || Password.length == 0 || ConfirmPw.length == 0) {
+       alert("Required Field Is Missing!!!");
+     } else if (!checkEmail.test(Email)) {
+       alert("invalid email!!!");
+     } else if (Password.length < 8) {
+       alert("Minimum 08 characters required!!!");
+     } else if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(Password)) {
+       alert("Use atleast 01 special character!!!");
+     } else if (/[ ]/.test(Password)) {
+       alert("Don't include space in password!!!");
+     } else if (Password !== ConfirmPw) {
+       alert("Password doesnot match!!!");
+     }
+  };
+
   async function searchLocation(text) {
     setSearchKeyword(text);
     setStreet(text);
