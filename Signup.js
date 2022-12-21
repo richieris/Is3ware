@@ -16,13 +16,13 @@ import React, { Component, useState } from "react";
 import axios from "axios";
 
 function Signup({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [zip, setZip] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Street, setStreet] = useState("");
+  const [City, setCity] = useState("");
+  const [State, setState] = useState("");
+  const [Country, setCountry] = useState("");
+  const [Zip, setZip] = useState("");
 
   const [searchKeyword, setSearchKeyword] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -30,24 +30,90 @@ function Signup({ navigation }) {
 
   const title = "Signup";
 
-  InsertRecord = () => {
-    var Email = this.email;
-    var Password = this.password;
-    var checkEmail = RegExp(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i);
-     if (Email.length == 0 || Password.length == 0 || ConfirmPw.length == 0) {
-       alert("Required Field Is Missing!!!");
-     } else if (!checkEmail.test(Email)) {
-       alert("invalid email!!!");
-     } else if (Password.length < 8) {
-       alert("Minimum 08 characters required!!!");
-     } else if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(Password)) {
-       alert("Use atleast 01 special character!!!");
-     } else if (/[ ]/.test(Password)) {
-       alert("Don't include space in password!!!");
-     } else if (Password !== ConfirmPw) {
-       alert("Password doesnot match!!!");
-     }
+  const InsertRecord = () => {
+    // var email = "";
+    // var password = "";
+    // var street_address = "";
+    // var city = "";
+    // var state = "";
+
+    axios
+      .post("http://10.160.201.119:3000/api/users", {
+        email: Email,
+        password: Password,
+        street_address: Street,
+        city: City,
+        state: State,
+        country: Country,
+      },{timeout:2000})
+      .then((response) => {
+        // Do something with the response data
+        console.log(response.data);
+        navigation.navigate("Login");
+      })
+      .catch((error) => {
+        // Do something with the error
+        console.error(error);
+        console.log(error.code);
+        console.log(error.message);
+        console.log(error.stack);
+      });
   };
+  // .then((response) => {
+  //       alert(response[0].Message); // If data is in JSON => Display alert msg
+  //       //Navigate to next screen if authentications are valid
+  //     })
+
+  // InsertRecord = () => {
+  //   var Email = email;
+  //   var Password = password;
+  //   var checkEmail = RegExp(
+  //     /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i
+  //   );
+  //   // if (Email.length == 0 || Password.length == 0 || ConfirmPw.length == 0) {
+  //   // if (Email.length == 0 || Password.length == 0 ) {
+  //   //   alert("Required Field Is Missing!!!");
+  //   // } else if (!checkEmail.test(Email)) {
+  //   //   alert("invalid email!!!");
+  //   // } else if (Password.length < 8) {
+  //   //   alert("Minimum 08 characters required!!!");
+  //   // } else if (!/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(Password)) {
+  //   //   alert("Use atleast 01 special character!!!");
+  //   // } else if (/[ ]/.test(Password)) {
+  //   //   alert("Don't include space in password!!!");
+  //   // } else {
+  //   var InsertAPIURL = "http://10.160.201.119:5000/users"; //API to render signup
+
+  //   var headers = {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //   };
+
+  //   var Data = {
+  //     Email: Email,
+  //     Password: Password,
+  //   };
+
+  //   // FETCH func ------------------------------------
+  //   axios
+  //     .get(InsertAPIURL, {
+  //       method: "POST",
+  //       headers: headers,
+  //       body: JSON.stringify(Data), //convert data to JSON
+  //     })
+  //     .then((response) => response.text()) //check response type of API (CHECK OUTPUT OF DATA IS IN JSON)
+  //     .then((response) => {
+  //       alert(response[0].Message); // If data is in JSON => Display alert msg
+  //       navigation.navigate("Login"); //Navigate to next screen if authentications are valid
+  //     })
+  //     .catch((error) => {
+  //       alert("Error Occured" + error);
+  //     });
+  //   // }
+  //   //  } else if (Password !== ConfirmPw) {
+  //   //    alert("Password doesnot match!!!");
+  //   //  }
+  // };
 
   async function searchLocation(text) {
     setSearchKeyword(text);
@@ -84,8 +150,9 @@ function Signup({ navigation }) {
             style={styles.TextInput}
             placeholder="Email."
             placeholderTextColor="#000"
+            value={Email}
             // editable={true}
-            onChangeText={(email) => setEmail(email)}
+            onChangeText={(e) => setEmail(e)}
           />
         </View>
 
@@ -95,7 +162,7 @@ function Signup({ navigation }) {
             placeholder="Password."
             placeholderTextColor="#000"
             // secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
+            onChangeText={(e) => setPassword(e)}
           />
         </View>
 
@@ -106,7 +173,7 @@ function Signup({ navigation }) {
             placeholder="Street Address"
             placeholderTextColor="#000"
             onChangeText={(text) => searchLocation(text)}
-            value={street}
+            value={Street}
           />
           {isShowingResults && (
             <FlatList
@@ -144,8 +211,8 @@ function Signup({ navigation }) {
             style={styles.TextInput}
             placeholder="City"
             placeholderTextColor="#000"
-            onChangeText={(city) => setCity(city)}
-            value={city}
+            onChangeText={(City) => setCity(City)}
+            value={City}
           />
         </View>
 
@@ -154,8 +221,8 @@ function Signup({ navigation }) {
             style={styles.TextInput}
             placeholder="State"
             placeholderTextColor="#000"
-            onChangeText={(state) => setState(state)}
-            value={state}
+            onChangeText={(State) => setState(State)}
+            value={State}
           />
         </View>
 
@@ -164,14 +231,16 @@ function Signup({ navigation }) {
             style={styles.TextInput}
             placeholder="Country"
             placeholderTextColor="#000"
-            onChangeText={(country) => setCountry(country)}
-            value={country}
+            onChangeText={(Country) => setCountry(Country)}
+            value={Country}
           />
         </View>
 
         <Pressable
           style={styles.loginBtn}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => {
+            InsertRecord();
+          }}
         >
           <Text style={styles.loginText}>{title}</Text>
         </Pressable>

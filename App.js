@@ -14,7 +14,7 @@ import Login from "./Login";
 import Welcome from "./Welcome";
 import Signup from "./Signup";
 import React, { Component, useState } from "react";
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 // export{Welcome, Login};
 // Starting our app.
 const Stack = createNativeStackNavigator();
@@ -55,9 +55,14 @@ function NavStack() {
 export default class App extends React.Component {
   render() {
     return (
+      
       <NavigationContainer>
         <NavStack />
       </NavigationContainer>
+
+
+
+
     );
   }
 }
