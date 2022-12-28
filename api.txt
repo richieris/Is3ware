@@ -1,1 +1,51 @@
 maps autofill api-AIzaSyAU0c0lM0otTV0CBZZU6EnH6bmeOFY0yDo
+
+var  express = require("express");
+var  bodyParser = require("body-parser");
+var mysql = require("mysql2");
+
+const app = express();
+
+// Use the body-parser middleware to parse the request body
+app.use(bodyParser.json());
+
+// Create a MySQL connection pool
+const connection = mysql.createPool({
+  host: "localhost",
+  user: "root",
+  password: "Rishirocks292",
+  database: "dmp_kamet",
+});
+
+// connection.connect(function (err) {
+//   if (err) {
+//     console.error("Error connecting: " + err.stack);
+//     return;
+//   }
+//   console.log("Connected as id " + connection.threadId);
+// });
+
+
+
+//Define the /api/users endpoint
+app.post("/api/users", async (req, res) => {
+  // Get the values to be inserted from the request body
+  const { email, password } = req.body; //, street_address, city, state, country
+  try {
+    // Insert the values into the users table in the database
+
+    connection.query(
+      "INSERT INTO User (email, password) VALUES (?,?)", //,street_address,city,state,country
+      [email, password]
+      //, street_address, city, state, country
+    );
+    res.send({ message: "User added successfully" });
+  } catch (error) {
+    res.status(500).send({ error });
+  }
+});
+
+// Start the server on port 3000
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});

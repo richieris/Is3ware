@@ -1,22 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
+
+import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./Login";
 import Welcome from "./Welcome";
 import Signup from "./Signup";
-import React, { Component, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-// export{Welcome, Login};
-// Starting our app.
+import Home from "./Home";
+import React, { Component } from "react";
+
+
 const Stack = createNativeStackNavigator();
 function NavStack() {
   return (
@@ -48,6 +40,7 @@ function NavStack() {
         component={Signup}
         options={{ title: "Signup" }}
       />
+      <Stack.Screen name="Home" component={Home} options={{ title: "Home" }} />
     </Stack.Navigator>
   );
 }
@@ -55,14 +48,9 @@ function NavStack() {
 export default class App extends React.Component {
   render() {
     return (
-      
       <NavigationContainer>
-        <NavStack />
+        <NavStack /> 
       </NavigationContainer>
-
-
-
-
     );
   }
 }

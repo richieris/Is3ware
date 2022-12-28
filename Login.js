@@ -9,9 +9,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import React, { Component, useState } from "react";
+
+import React, {  useState } from "react";
 
 function Login({ navigation }) {
   const [email, setEmail] = useState("");
@@ -48,7 +47,7 @@ function Login({ navigation }) {
 
       <Pressable
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate("Home",{paramKey:email})}
       >
         <Text style={styles.loginText}>{title}</Text>
       </Pressable>

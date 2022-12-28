@@ -30,25 +30,44 @@ function Signup({ navigation }) {
 
   const title = "Signup";
 
-  const InsertRecord = () => {
-    // var email = "";
-    // var password = "";
-    // var street_address = "";
-    // var city = "";
-    // var state = "";
+  const InsertRecord = async () => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postName: "React updates " }),
+    };
 
-    axios
-      .post("http://10.160.201.119:3000/api/users", {
-        email: Email,
-        password: Password,
-        street_address: Street,
-        city: City,
-        state: State,
-        country: Country,
-      },{timeout:2000})
+  //   try {
+  //     await fetch("http://192.168.7.85:3000/api/users", requestOptions).then(
+  //       (response) => {
+  //         response.json();
+  //         // .then((data) => {
+  //         //   Alert.alert("Post created at : ", data.createdAt);
+  //         // });
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+
+    axios.post(
+        "http://192.168.7.85:3000/Addusers", //10.160.201.119
+        {
+          
+          email: Email,
+          password: Password,
+          street_address: Street,
+          city: City,
+          state: State,
+          country: Country
+        },
+        { timeout: 2000 }
+      )
       .then((response) => {
         // Do something with the response data
-        console.log(response.data);
+        console.log(response.data.message);
         navigation.navigate("Login");
       })
       .catch((error) => {
@@ -57,6 +76,9 @@ function Signup({ navigation }) {
         console.log(error.code);
         console.log(error.message);
         console.log(error.stack);
+        console.log(error.response);
+        console.log(error.request);
+        console.log(Street);
       });
   };
   // .then((response) => {
