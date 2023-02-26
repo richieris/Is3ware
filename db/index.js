@@ -10,26 +10,14 @@ app.use(bodyParser.json());
 // Create a MySQL connection pool
 const connection = mysql.createConnection({
   // socketPath: "/cloudsql/my-project-12345:us-central1:mydatabase",
-  host: "34.123.248.249",
+  host: "34.132.212.142",
   user: "root",
-  password: "Rishirocks292",
+  password: "Ashwini129#",
   database: "dmp_kamet",
 });
 
-// const createUnixSocketPool = async (config) => {
-//   // Note: Saving credentials in environment variables is convenient, but not
-//   // secure - consider a more secure solution such as
-//   // Cloud Secret Manager (https://cloud.google.com/secret-manager) to help
-//   // keep secrets safe.
-//   return mysql.createPool({
-//     user: process.env.DB_USER, // e.g. 'my-db-user'
-//     password: process.env.DB_PASS, // e.g. 'my-db-password'
-//     database: process.env.DB_NAME, // e.g. 'my-database'
-//     socketPath: process.env.INSTANCE_UNIX_SOCKET, // e.g. '/cloudsql/project:region:instance'
-//     // Specify additional properties here.
-//     ...config,
-//   });
-// };
+
+
 
 connection.connect((error) => {
   if (error) {
