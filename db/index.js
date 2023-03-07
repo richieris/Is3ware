@@ -101,7 +101,7 @@ app.get("/search", (req, res) => {
 app.get("/address", (req, res) => {
   const searchTerm = req.query.q;
   
-  connection.query(
+  connection.query( 
     
     `SELECT * FROM addresses WHERE person_id LIKE '%${searchTerm}%'`,
     (err, results) => {
